@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Masters Pool</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f3ee;color:#1a1a1a;font-size:15px}
+  header{background:#1a4a2e;color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+  header h1{font-size:20px;font-weight:600;letter-spacing:-0.3px}
+  header p{font-size:13px;opacity:0.75;margin-top:2px}
+  .subtitle{font-size:12px;opacity:0.6;text-align:right}
+  .container{max-width:960px;margin:0 auto;padding:24px 16px}
+  .tabs{display:flex;gap:4px;border-bottom:1.5px solid #d4c9b0;margin-bottom:24px}
+  .tab{padding:9px 18px;font-size:14px;cursor:pointer;border:none;background:none;color:#666;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;font-family:inherit;border-radius:6px 6px 0 0}
+  .tab:hover{background:#ede8de}
+  .tab.active{color:#1a4a2e;border-bottom-color:#1a4a2e;font-weight:600;background:#ede8de}
+  .section{display:none}.section.active{display:block}
+  .card{background:#fff;border:1px solid #ddd;border-radius:10px;padding:20px;margin-bottom:16px}
+  .card h2{font-size:16px;font-weight:600;margin-bottom:14px;color:#1a4a2e}
+  label{font-size:13px;color:#555;display:block;margin-bottom:4px}
+  input[type=number],input[type=text]{padding:7px 10px;font-size:14px;border:1px solid #ccc;border-radius:7px;background:#fff;color:#1a1a1a;font-family:inherit;transition:border-color 0.15s}
+  input:focus{outline:none;border-color:#1a4a2e;box-shadow:0 0 0 2px rgba(26,74,46,0.1)}
+  input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:#1a4a2e}
+  button{padding:8px 16px;font-size:13px;border:1px solid #ccc;border-radius:7px;background:#fff;color:#1a1a1a;cursor:pointer;font-family:inherit;transition:all 0.15s}
+  button:hover{background:#f0f0f0}
+  button.primary{background:#1a4a2e;color:#fff;border-color:#1a4a2e}
+  button.primary:hover{background:#163d25}
+  button.danger{color:#c0392b;border-color:#f0c0bb}
+  button.danger:hover{background:#fdf0ee}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;padding:9px 8px;color:#666;font-weight:600;border-bottom:1.5px solid #e5e0d5;white-space:nowrap;font-size:12px;text-transform:uppercase;letter-spacing:0.5px}
+  td{padding:9px 8px;border-bottom:1px solid #f0ece4;vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:#faf8f4}
+  .score-pos{color:#c0392b;font-weight:500}
+  .score-neg{color:#1a7a4a;font-weight:500}
+  .score-e{color:#888}
+  .cut-badge{font-size:10px;padding:1px 5px;border-radius:6px;background:#fde8e8;color:#a32d2d;margin-left:3px;font-weight:600}
+  .rank-gold{color:#b8860b;font-weight:700;font-size:15px}
+  .incomplete-badge{font-size:11px;color:#c0392b;background:#fde8e8;padding:2px 7px;border-radius:10px;margin-left:6px}
+  .tag{display:inline-block;background:#f0ece4;border-radius:12px;padding:2px 9px;font-size:11px;margin:2px;color:#444}
+  .player-list{max-height:200px;overflow-y:auto;border:1px solid #ddd;border-radius:8px}
+  .player-item{padding:8px 12px;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f5f5f5}
+  .player-item:last-child{border-bottom:none}
+  .player-item:hover{background:#f5f8f5}
+  .player-item.banned{opacity:0.3;pointer-events:none}
+  .player-item.selected{background:#f0f7f2}
+  .sel-tag{display:inline-flex;align-items:center;gap:5px;background:#e8f2eb;border:1px solid #b8d8c0;border-radius:20px;padding:4px 10px;font-size:12px;margin:2px;color:#1a4a2e}
+  .sel-tag button{border:none;background:none;padding:0;cursor:pointer;font-size:15px;color:#666;line-height:1}
+  .sel-tag button:hover{color:#c0392b;background:none}
+  .odds-tag{font-size:11px;color:#888}
+  .net-input{width:65px;text-align:center}
+  .score-sm{width:70px;text-align:center}
+  .admin-gate{text-align:center;padding:40px 20px}
+  .admin-gate input{width:220px;margin-bottom:12px;display:block;margin-left:auto;margin-right:auto;text-align:center}
+  .admin-gate p{font-size:13px;color:#888;margin-bottom:16px}
+  .grid-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+  .stat{background:#f5f8f5;border-radius:8px;padding:14px;text-align:center;border:1px solid #d0e8d8}
+  .stat-label{font-size:12px;color:#666;margin-bottom:4px}
+  .stat-val{font-size:24px;font-weight:600;color:#1a4a2e}
+  .notice{background:#fffbe6;border:1px solid #e8d88a;border-radius:8px;padding:12px 16px;font-size:13px;color:#7a6010;margin-bottom:16px}
+  .picked-by{font-size:11px;color:#888}
+  .leaderboard-note{font-size:12px;color:#888;margin-top:12px;font-style:italic}
+  @media(max-width:600px){
+    .grid-stats{grid-template-columns:1fr 1fr}
+    th,td{padding:7px 4px;font-size:12px}
+    header{flex-direction:column;align-items:flex-start;gap:4px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>⛳ 2026 Masters Pool</h1>
+    <p>28 participants · 3 pros each · missed cut = +10 penalty</p>
+  </div>
+  <div class="subtitle">Augusta National<br>Apr 9–12, 2026</div>
+</header>
+
+<div class="container">
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('leaderboard',this)">Leaderboard</button>
+    <button class="tab" onclick="showTab('admin',this)">Admin</button>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div id="tab-leaderboard" class="section active">
+    <div class="grid-stats">
+      <div class="stat"><div class="stat-label">Participants</div><div class="stat-val" id="stat-count">28</div></div>
+      <div class="stat"><div class="stat-label">Leader</div><div class="stat-val" id="stat-leader">—</div></div>
+      <div class="stat"><div class="stat-label">Leader score</div><div class="stat-val" id="stat-score">—</div></div>
+    </div>
+    <div class="card">
+      <h2>Leaderboard</h2>
+      <div id="lb-content"></div>
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div id="tab-admin" class="section">
+    <div id="admin-gate" class="card admin-gate">
+      <h2>Admin access</h2>
+      <p>Enter the admin password to update scores and picks.</p>
+      <input type="password" id="pw-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()" />
+      <button class="primary" onclick="checkPw()">Enter</button>
+      <div id="pw-err" style="color:#c0392b;font-size:13px;margin-top:8px"></div>
+    </div>
+    <div id="admin-content" style="display:none">
+      <div class="tabs" style="margin-bottom:20px">
+        <button class="tab active" onclick="showAdminTab('nets',this)">Wednesday scores</button>
+        <button class="tab" onclick="showAdminTab('picks',this)">Manage picks</button>
+        <button class="tab" onclick="showAdminTab('scores',this)">Pro scores</button>
+      </div>
+      <div id="atab-nets" class="section active"></div>
+      <div id="atab-picks" class="section"></div>
+      <div id="atab-scores" class="section"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────────────
+const ADMIN_PASSWORD = 'masters2026';   // ← change this before sharing
+const MISSED_CUT_PENALTY = 10;
+const BANNED = ['Scottie Scheffler','Rory McIlroy'];
+
+// ── PLAYER LIST ──────────────────────────────────────────────────────────────
+const ALL_PLAYERS = [
+  {name:'Jon Rahm',odds:'+900'},{name:'Bryson DeChambeau',odds:'+1000'},
+  {name:'Xander Schauffele',odds:'+1500'},{name:'Ludvig Åberg',odds:'+1600'},
+  {name:'Matt Fitzpatrick',odds:'+2000'},{name:'Cameron Young',odds:'+2000'},
+  {name:'Tommy Fleetwood',odds:'+2200'},{name:'Justin Rose',odds:'+2700'},
+  {name:'Hideki Matsuyama',odds:'+2700'},{name:'Collin Morikawa',odds:'+3000'},
+  {name:'Robert MacIntyre',odds:'+3000'},{name:'Min Woo Lee',odds:'+3300'},
+  {name:'Patrick Reed',odds:'+4000'},{name:'Brooks Koepka',odds:'+4000'},
+  {name:'Chris Gotterup',odds:'+4500'},{name:'Russell Henley',odds:'+4500'},
+  {name:'Si Woo Kim',odds:'+4500'},{name:'Jordan Spieth',odds:'+4500'},
+  {name:'Viktor Hovland',odds:'+5000'},{name:'Shane Lowry',odds:'+6000'},
+  {name:'Nicolai Højgaard',odds:'+6000'},{name:'Jake Knapp',odds:'+6500'},
+  {name:'Justin Thomas',odds:'+6500'},{name:'Akshay Bhatia',odds:'+6500'},
+  {name:'Maverick McNealy',odds:'+6500'},{name:'Adam Scott',odds:'+7000'},
+  {name:'J.J. Spaun',odds:'+8000'},{name:'Sam Burns',odds:'+9000'},
+  {name:'Corey Conners',odds:'+9000'},{name:'Cameron Smith',odds:'+9000'},
+  {name:'Gary Woodland',odds:'+10000'},{name:'Sepp Straka',odds:'+12000'},
+  {name:'Brian Harman',odds:'+12000'},{name:'Tyrrell Hatton',odds:'+5500'},
+  {name:'Tom Kim',odds:'+8000'},{name:'Sungjae Im',odds:'+8000'},
+  {name:'Sahith Theegala',odds:'+8000'},{name:'Tony Finau',odds:'+10000'},
+  {name:'Jason Day',odds:'+10000'},{name:'Wyndham Clark',odds:'+10000'},
+  {name:'Marco Penge',odds:'+20000'},{name:'Fred Couples',odds:'+30000'},
+  {name:'Ángel Cabrera',odds:'+50000'},
+];
+
+// ── PARTICIPANTS (pre-loaded from your sheet) ────────────────────────────────
+let participants = [
+  {id:1,last:'Akins',first:'Dave',handicap:11.6,net:null,pros:[]},
+  {id:2,last:'Atkinson',first:'Ken',handicap:9.7,net:null,pros:[]},
+  {id:3,last:'Brooks',first:'Lindsay',handicap:5.9,net:null,pros:['Sam Burns','J.J. Spaun','Tommy Fleetwood']},
+  {id:4,last:'Bruno',first:'Frank',handicap:14.6,net:null,pros:['J.J. Spaun','Jordan Spieth','Xander Schauffele']},
+  {id:5,last:'Carnovale',first:'Alessandro',handicap:6.6,net:null,pros:['Cameron Young','Justin Rose','Xander Schauffele']},
+  {id:6,last:'Collier',first:'Dean',handicap:6.9,net:null,pros:['Ludvig Åberg','Jon Rahm','Tommy Fleetwood']},
+  {id:7,last:'Cordoba',first:'Mike',handicap:11.5,net:null,pros:['Matt Fitzpatrick','Jon Rahm','Justin Rose']},
+  {id:8,last:'Davidson',first:'Russ',handicap:6.6,net:null,pros:['Bryson DeChambeau','Robert MacIntyre','Ludvig Åberg']},
+  {id:9,last:'Davidson',first:'Wayne',handicap:8.6,net:null,pros:['Bryson DeChambeau','Jon Rahm','Tommy Fleetwood']},
+  {id:10,last:'Englmaier',first:'Tom',handicap:6.1,net:null,pros:[]},
+  {id:11,last:'Esmail',first:'Karim',handicap:10.1,net:null,pros:['Bryson DeChambeau','Jon Rahm','Xander Schauffele']},
+  {id:12,last:'Graham',first:'Brian',handicap:4.6,net:null,pros:['Bryson DeChambeau','Viktor Hovland','Marco Penge']},
+  {id:13,last:'Guzzo',first:'Gio',handicap:0.1,net:null,pros:['Tommy Fleetwood','Jon Rahm','Xander Schauffele']},
+  {id:14,last:'Guzzo',first:'Joe',handicap:9.7,net:null,pros:['Bryson DeChambeau','Justin Rose','Xander Schauffele']},
+  {id:15,last:'Harrison',first:'Brandon',handicap:5.8,net:null,pros:[]},
+  {id:16,last:'Hopkins',first:'Jim',handicap:9.7,net:null,pros:['Bryson DeChambeau','Jon Rahm','Tommy Fleetwood']},
+  {id:17,last:'Jung',first:'Jamie',handicap:3,net:null,pros:['Matt Fitzpatrick','Jon Rahm','Patrick Reed']},
+  {id:18,last:'Kenny',first:'Tom',handicap:0.08,net:null,pros:[]},
+  {id:19,last:'Kirilenko',first:'Mike',handicap:12.6,net:null,pros:['Matt Fitzpatrick','Ludvig Åberg','Brooks Koepka']},
+  {id:20,last:'Lee',first:'Robert',handicap:11.4,net:null,pros:['Bryson DeChambeau','Jon Rahm','Ludvig Åberg']},
+  {id:21,last:'Lupulyak',first:'Vadym',handicap:12,net:null,pros:['Bryson DeChambeau','Ludvig Åberg','Xander Schauffele']},
+  {id:22,last:'Ma',first:'Ernie',handicap:13.3,net:null,pros:['Xander Schauffele','Justin Rose','Ludvig Åberg']},
+  {id:23,last:'Mann',first:'Sam',handicap:11.4,net:null,pros:[]},
+  {id:24,last:'Margawang',first:'Edwin',handicap:11.8,net:null,pros:['Hideki Matsuyama','Jon Rahm','Xander Schauffele']},
+  {id:25,last:'Mauro',first:'Anthony',handicap:5.3,net:null,pros:['Xander Schauffele','Cameron Young','Matt Fitzpatrick']},
+  {id:26,last:'Patel',first:'Vikas',handicap:9.4,net:null,pros:[]},
+  {id:27,last:'Peterson',first:'Don',handicap:9.7,net:null,pros:[]},
+  {id:28,last:'Pool',first:'Greg',handicap:0.08,net:null,pros:['Bryson DeChambeau','Cameron Young','Matt Fitzpatrick']},
+];
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+let proScores = {};
+let adminUnlocked = false;
+let editingIdx = null;
+let editSelected = [];
+let editSearch = '';
+let currentAdminTab = 'nets';
+
+// ── HELPERS ──────────────────────────────────────────────────────────────────
+function fmtScore(s) {
+  if (s === null || s === undefined) return '—';
+  if (s === 0) return 'E';
+  return s > 0 ? '+' + s : '' + s;
+}
+function scClass(s) {
+  if (s === null || s === undefined || s === 0) return 'score-e';
+  return s > 0 ? 'score-pos' : 'score-neg';
+}
+function getProScore(name) {
+  const d = proScores[name];
+  if (!d) return 0;
+  return d.cut ? MISSED_CUT_PENALTY : (d.score || 0);
+}
+function prosTotal(p) {
+  return p.pros.reduce((a, n) => a + getProScore(n), 0);
+}
+function totalScore(p) {
+  if (p.pros.length < 3) return null;
+  return (p.net || 0) + prosTotal(p);
+}
+
+// ── LEADERBOARD ──────────────────────────────────────────────────────────────
+function renderLeaderboard() {
+  const complete = participants.filter(p => p.pros.length === 3);
+  const incomplete = participants.filter(p => p.pros.length < 3);
+  const sorted = complete.map(p => ({...p, total: totalScore(p)})).sort((a, b) => a.total - b.total);
+
+  // stats
+  if (sorted.length) {
+    document.getElementById('stat-count').textContent = participants.length;
+    document.getElementById('stat-leader').textContent = sorted[0].last;
+    document.getElementById('stat-score').textContent = fmtScore(sorted[0].total);
+  }
+
+  let html = '';
+  if (sorted.length) {
+    const leader = sorted[0].total;
+    html += `<div style="overflow-x:auto"><table><thead><tr>
+      <th>#</th><th>Name</th><th>Pros picked</th>
+      <th style="text-align:right">Wed net</th>
+      <th style="text-align:right">Pros</th>
+      <th style="text-align:right">Total</th>
+      <th style="text-align:right">Back</th>
+    </tr></thead><tbody>`;
+    sorted.forEach((p, i) => {
+      const pt = prosTotal(p);
+      const diff = p.total - leader;
+      const prosHtml = p.pros.map(n => {
+        const d = proScores[n]; const isCut = d && d.cut; const s = getProScore(n);
+        return `<span style="margin-right:6px;white-space:nowrap">${n.split(' ').slice(-1)[0]}${isCut ? '<span class="cut-badge">CUT</span>' : ''} <span class="${scClass(s)}">${fmtScore(s)}</span></span>`;
+      }).join('');
+      html += `<tr>
+        <td class="${i === 0 ? 'rank-gold' : ''}" style="width:26px">${i + 1}</td>
+        <td style="font-weight:600;white-space:nowrap">${p.first} ${p.last}</td>
+        <td style="font-size:12px;line-height:1.8">${prosHtml}</td>
+        <td class="${scClass(p.net)}" style="text-align:right">${fmtScore(p.net)}</td>
+        <td class="${scClass(pt)}" style="text-align:right">${fmtScore(pt)}</td>
+        <td class="${scClass(p.total)}" style="text-align:right;font-weight:700;font-size:14px">${fmtScore(p.total)}</td>
+        <td style="text-align:right;color:#999">${i === 0 ? '—' : '+' + diff}</td>
+      </tr>`;
+    });
+    html += '</tbody></table></div>';
+  }
+
+  if (incomplete.length) {
+    html += `<div style="margin-top:20px;font-size:13px;color:#888;font-weight:600;margin-bottom:8px">Picks not yet complete (${incomplete.length})</div>`;
+    html += incomplete.map(p =>
+      `<div style="padding:5px 0;font-size:13px;color:#999">${p.first} ${p.last}${p.pros.length ? ' — ' + p.pros.join(', ') : ' — no picks entered'}</div>`
+    ).join('');
+  }
+
+  if (!sorted.length && !incomplete.length) html = '<div style="color:#999;text-align:center;padding:2rem">No data yet.</div>';
+  document.getElementById('lb-content').innerHTML = html;
+}
+
+// ── ADMIN AUTH ───────────────────────────────────────────────────────────────
+function checkPw() {
+  const val = document.getElementById('pw-input').value;
+  if (val === ADMIN_PASSWORD) {
+    adminUnlocked = true;
+    document.getElementById('admin-gate').style.display = 'none';
+    document.getElementById('admin-content').style.display = 'block';
+    renderNets();
+  } else {
+    document.getElementById('pw-err').textContent = 'Incorrect password.';
+  }
+}
+
+// ── WEDNESDAY NETS ───────────────────────────────────────────────────────────
+function renderNets() {
+  let html = `<div class="card"><h2>Wednesday net scores</h2>
+  <div class="notice">Enter each participant's net score relative to par. Negative = under par (e.g. -2). Leave blank = 0.</div>
+  <div style="overflow-x:auto"><table><thead><tr><th>#</th><th>Name</th><th>Handicap</th><th style="text-align:right">Net score vs par</th></tr></thead><tbody>`;
+  participants.forEach((p, i) => {
+    html += `<tr>
+      <td style="color:#999">${p.id}</td>
+      <td>${p.first} ${p.last}</td>
+      <td style="color:#999">${p.handicap}</td>
+      <td style="text-align:right"><input type="number" class="net-input" value="${p.net !== null ? p.net : ''}" placeholder="0" oninput="setNet(${i},this.value)" /></td>
+    </tr>`;
+  });
+  html += '</tbody></table></div></div>';
+  document.getElementById('atab-nets').innerHTML = html;
+}
+
+function setNet(i, v) {
+  participants[i].net = v === '' ? null : (parseInt(v) || 0);
+  renderLeaderboard();
+}
+
+// ── PICKS ────────────────────────────────────────────────────────────────────
+function renderPicks() {
+  let html = `<div class="card"><h2>Manage picks</h2>`;
+  participants.forEach((p, i) => {
+    const needsPicks = p.pros.length < 3;
+    html += `<div style="padding:12px 0;border-bottom:1px solid #f0ece4">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+        <div style="flex:1">
+          <span style="font-weight:600">${p.first} ${p.last}</span>
+          ${needsPicks ? '<span class="incomplete-badge">needs picks</span>' : ''}
+          <div style="margin-top:5px">${p.pros.length ? p.pros.map(n => `<span class="tag">${n}</span>`).join('') : '<span style="font-size:12px;color:#999">none</span>'}</div>
+        </div>
+        <button onclick="startEdit(${i})">Edit</button>
+      </div>
+      <div id="edit-panel-${i}" style="display:none;margin-top:12px;padding:12px;background:#fafaf8;border-radius:8px;border:1px solid #e5e0d5"></div>
+    </div>`;
+  });
+  html += '</div>';
+  document.getElementById('atab-picks').innerHTML = html;
+}
+
+function startEdit(i) {
+  if (editingIdx !== null && editingIdx !== i) {
+    document.getElementById('edit-panel-' + editingIdx).style.display = 'none';
+  }
+  editingIdx = i;
+  editSelected = [...participants[i].pros];
+  editSearch = '';
+  document.getElementById('edit-panel-' + i).style.display = 'block';
+  renderEditPanel(i);
+}
+
+function renderEditPanel(i) {
+  const el = document.getElementById('edit-panel-' + i);
+  const filtered = ALL_PLAYERS.filter(p => p.name.toLowerCase().includes(editSearch.toLowerCase()));
+  const selHtml = editSelected.map(n =>
+    `<span class="sel-tag">${n}<button onclick="removeEditSel('${n.replace(/'/g,"\\'")}',${i})">×</button></span>`
+  ).join('') || '<span style="font-size:12px;color:#999">none selected</span>';
+
+  el.innerHTML = `
+    <div style="margin-bottom:10px">
+      <div style="font-size:12px;color:#666;margin-bottom:5px">Selected (${editSelected.length}/3):</div>
+      <div style="min-height:30px">${selHtml}</div>
+    </div>
+    <input type="text" placeholder="Search player..." value="${editSearch}" style="width:100%;margin-bottom:8px" oninput="handleEditSearch(this.value,${i})" />
+    <div class="player-list">
+      ${filtered.map(p => {
+        const banned = BANNED.includes(p.name);
+        const sel = editSelected.includes(p.name);
+        return `<div class="player-item${banned?' banned':''}${sel?' selected':''}" onclick="toggleEditSel('${p.name.replace(/'/g,"\\'")}',${i})">
+          <span>${p.name}${banned ? ' <span style="font-size:11px;color:#bbb">(not eligible)</span>' : ''}</span>
+          <span class="odds-tag">${p.odds}${sel ? ' ✓' : ''}</span>
+        </div>`;
+      }).join('')}
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
+      <button class="primary" onclick="savePicks(${i})">Save picks</button>
+      <button onclick="cancelEdit(${i})">Cancel</button>
+      <span id="edit-msg-${i}" style="font-size:12px;color:#c0392b"></span>
+    </div>`;
+}
+
+function handleEditSearch(v, i) { editSearch = v; renderEditPanel(i); }
+function removeEditSel(n, i) { editSelected = editSelected.filter(x => x !== n); renderEditPanel(i); }
+function toggleEditSel(n, i) {
+  if (editSelected.includes(n)) { editSelected = editSelected.filter(x => x !== n); }
+  else {
+    if (editSelected.length >= 3) { document.getElementById('edit-msg-' + i).textContent = 'Max 3 pros.'; return; }
+    editSelected.push(n);
+  }
+  renderEditPanel(i);
+}
+function savePicks(i) {
+  if (editSelected.length !== 3) { document.getElementById('edit-msg-' + i).textContent = 'Select exactly 3.'; return; }
+  participants[i].pros = [...editSelected];
+  cancelEdit(i);
+  renderPicks();
+  renderLeaderboard();
+  renderScores();
+}
+function cancelEdit(i) {
+  editSelected = []; editSearch = ''; editingIdx = null;
+  const el = document.getElementById('edit-panel-' + i);
+  if (el) el.style.display = 'none';
+}
+
+// ── PRO SCORES ───────────────────────────────────────────────────────────────
+function renderScores() {
+  const usedPros = [...new Set(participants.flatMap(p => p.pros))].sort();
+  let html = `<div class="card"><h2>Pro scores (cumulative vs par)</h2>
+  <div class="notice">Update after each round. Enter the player's total score relative to par (e.g. -8 = 8 under). Check "Missed cut" to apply the +${MISSED_CUT_PENALTY} penalty.</div>`;
+  if (!usedPros.length) {
+    html += '<div style="color:#999;font-size:13px">No pros picked yet — add picks first.</div></div>';
+    document.getElementById('atab-scores').innerHTML = html;
+    return;
+  }
+  html += `<div style="overflow-x:auto"><table><thead><tr>
+    <th>Player</th><th>Picked by</th>
+    <th style="text-align:center">Missed cut</th>
+    <th style="text-align:right">Score vs par</th>
+    <th style="text-align:right">Effective</th>
+  </tr></thead><tbody>`;
+  usedPros.forEach(name => {
+    const d = proScores[name] || {score: 0, cut: false};
+    const pickedBy = participants.filter(p => p.pros.includes(name)).map(p => p.last).join(', ');
+    const eff = d.cut ? MISSED_CUT_PENALTY : (d.score || 0);
+    html += `<tr>
+      <td style="font-weight:600;white-space:nowrap">${name}</td>
+      <td class="picked-by">${pickedBy}</td>
+      <td style="text-align:center"><input type="checkbox" ${d.cut ? 'checked' : ''} onchange="setCut('${name.replace(/'/g,"\\'")}',this.checked)"></td>
+      <td style="text-align:right"><input type="number" class="score-sm" value="${d.score || 0}" ${d.cut ? 'disabled' : ''} oninput="setScore('${name.replace(/'/g,"\\'")}',this.value)" /></td>
+      <td class="${scClass(eff)}" style="text-align:right;font-weight:700">${fmtScore(eff)}</td>
+    </tr>`;
+  });
+  html += '</tbody></table></div></div>';
+  document.getElementById('atab-scores').innerHTML = html;
+}
+
+function setScore(name, v) {
+  if (!proScores[name]) proScores[name] = {score: 0, cut: false};
+  proScores[name].score = v === '' ? 0 : (parseInt(v) || 0);
+  renderLeaderboard();
+}
+function setCut(name, v) {
+  if (!proScores[name]) proScores[name] = {score: 0, cut: false};
+  proScores[name].cut = v;
+  renderLeaderboard();
+  renderScores();
+}
+
+// ── TABS ─────────────────────────────────────────────────────────────────────
+function showTab(id, btn) {
+  document.querySelectorAll('.tabs > .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.container > .tabs + .section, .container > div > .section').forEach(s => s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+  if (id === 'leaderboard') renderLeaderboard();
+}
+
+function showAdminTab(id, btn) {
+  document.querySelectorAll('#admin-content .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#admin-content .section').forEach(s => s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('atab-' + id).classList.add('active');
+  if (id === 'nets') renderNets();
+  if (id === 'picks') renderPicks();
+  if (id === 'scores') renderScores();
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+renderLeaderboard();
+</script>
+</body>
+</html>
