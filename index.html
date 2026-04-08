@@ -158,33 +158,33 @@ const ALL_PLAYERS = [
 
 // ── PARTICIPANTS (pre-loaded from your sheet) ────────────────────────────────
 let participants = [
-  {id:1,last:'Akins',first:'Dave',handicap:11.6,net:null,feePaid:false,pros:[]},
-  {id:2,last:'Atkinson',first:'Ken',handicap:9.7,net:null,feePaid:false,pros:[]},
-  {id:3,last:'Brooks',first:'Lindsay',handicap:5.9,net:null,feePaid:false,pros:['Sam Burns','J.J. Spaun','Tommy Fleetwood']},
-  {id:4,last:'Bruno',first:'Frank',handicap:14.6,net:null,feePaid:false,pros:['J.J. Spaun','Jordan Spieth','Xander Schauffele']},
+  {id:1,last:'Akins',first:'Dave',handicap:11.6,net:null,feePaid:false,pros:['Chris Gotterup','Tommy Fleetwood','Patrick Reed']},
+  {id:2,last:'Atkinson',first:'Ken',handicap:9.7,net:null,feePaid:false,pros:['Justin Rose','Patrick Reed','Sungjae Im']},
+  {id:3,last:'Brooks',first:'Lindsay',handicap:5.9,net:null,feePaid:false,pros:['J.J. Spaun','Sam Burns','Tommy Fleetwood']},
+  {id:4,last:'Bruno',first:'Frank',handicap:14.6,net:null,feePaid:false,pros:['Jordan Spieth','J.J. Spaun','Xander Schauffele']},
   {id:5,last:'Carnovale',first:'Alessandro',handicap:6.6,net:null,feePaid:false,pros:['Cameron Young','Justin Rose','Xander Schauffele']},
-  {id:6,last:'Collier',first:'Dean',handicap:6.9,net:null,feePaid:false,pros:['Ludvig Åberg','Jon Rahm','Tommy Fleetwood']},
-  {id:7,last:'Cordoba',first:'Mike',handicap:11.5,net:null,feePaid:false,pros:['Matt Fitzpatrick','Jon Rahm','Justin Rose']},
-  {id:8,last:'Davidson',first:'Russ',handicap:6.6,net:null,feePaid:false,pros:['Bryson DeChambeau','Robert MacIntyre','Ludvig Åberg']},
+  {id:6,last:'Collier',first:'Dean',handicap:6.9,net:null,feePaid:false,pros:['Jon Rahm','Ludvig Åberg','Tommy Fleetwood']},
+  {id:7,last:'Cordoba',first:'Mike',handicap:11.5,net:null,feePaid:false,pros:['Jon Rahm','Matt Fitzpatrick','Justin Rose']},
+  {id:8,last:'Davidson',first:'Russ',handicap:6.6,net:null,feePaid:false,pros:['Bryson DeChambeau','Ludvig Åberg','Robert MacIntyre']},
   {id:9,last:'Davidson',first:'Wayne',handicap:8.6,net:null,feePaid:false,pros:['Bryson DeChambeau','Jon Rahm','Tommy Fleetwood']},
-  {id:10,last:'Englmaier',first:'Tom',handicap:6.1,net:null,feePaid:false,pros:[]},
+  {id:10,last:'Englmaier',first:'Tom',handicap:6.1,net:null,feePaid:false,pros:['Matt Fitzpatrick','Ludvig Åberg','Robert MacIntyre']},
   {id:11,last:'Esmail',first:'Karim',handicap:10.1,net:null,feePaid:false,pros:['Bryson DeChambeau','Jon Rahm','Xander Schauffele']},
   {id:12,last:'Graham',first:'Brian',handicap:4.6,net:null,feePaid:false,pros:['Bryson DeChambeau','Viktor Hovland','Marco Penge']},
-  {id:13,last:'Guzzo',first:'Gio',handicap:0.1,net:null,feePaid:false,pros:['Tommy Fleetwood','Jon Rahm','Xander Schauffele']},
+  {id:13,last:'Guzzo',first:'Gio',handicap:0.1,net:null,feePaid:false,pros:['Jon Rahm','Tommy Fleetwood','Xander Schauffele']},
   {id:14,last:'Guzzo',first:'Joe',handicap:9.7,net:null,feePaid:false,pros:['Bryson DeChambeau','Justin Rose','Xander Schauffele']},
   {id:15,last:'Harrison',first:'Brandon',handicap:5.8,net:null,feePaid:false,pros:[]},
   {id:16,last:'Hopkins',first:'Jim',handicap:9.7,net:null,feePaid:false,pros:['Bryson DeChambeau','Jon Rahm','Tommy Fleetwood']},
-  {id:17,last:'Jung',first:'Jamie',handicap:3,net:null,feePaid:false,pros:['Matt Fitzpatrick','Jon Rahm','Patrick Reed']},
-  {id:18,last:'Kenny',first:'Tom',handicap:0.08,net:null,feePaid:false,pros:[]},
+  {id:17,last:'Jung',first:'Jamie',handicap:3,net:null,feePaid:false,pros:['Jon Rahm','Matt Fitzpatrick','Patrick Reed']},
+  {id:18,last:'Kenny',first:'Tom',handicap:0.08,net:null,feePaid:false,pros:['Bryson DeChambeau','Justin Rose','Patrick Reed']},
   {id:19,last:'Kirilenko',first:'Mike',handicap:12.6,net:null,feePaid:false,pros:['Matt Fitzpatrick','Ludvig Åberg','Brooks Koepka']},
   {id:20,last:'Lee',first:'Robert',handicap:11.4,net:null,feePaid:false,pros:['Bryson DeChambeau','Jon Rahm','Ludvig Åberg']},
   {id:21,last:'Lupulyak',first:'Vadym',handicap:12,net:null,feePaid:false,pros:['Bryson DeChambeau','Ludvig Åberg','Xander Schauffele']},
-  {id:22,last:'Ma',first:'Ernie',handicap:13.3,net:null,feePaid:false,pros:['Xander Schauffele','Justin Rose','Ludvig Åberg']},
+  {id:22,last:'Ma',first:'Ernie',handicap:13.3,net:null,feePaid:false,pros:['Ludvig Åberg','Justin Rose','Xander Schauffele']},
   {id:23,last:'Mann',first:'Sam',handicap:11.4,net:null,feePaid:false,pros:[]},
-  {id:24,last:'Margawang',first:'Edwin',handicap:11.8,net:null,feePaid:false,pros:['Hideki Matsuyama','Jon Rahm','Xander Schauffele']},
-  {id:25,last:'Mauro',first:'Anthony',handicap:5.3,net:null,feePaid:false,pros:['Xander Schauffele','Cameron Young','Matt Fitzpatrick']},
-  {id:26,last:'Patel',first:'Vikas',handicap:9.4,net:null,feePaid:false,pros:[]},
-  {id:27,last:'Peterson',first:'Don',handicap:9.7,net:null,feePaid:false,pros:[]},
+  {id:24,last:'Margawang',first:'Edwin',handicap:11.8,net:null,feePaid:false,pros:['Jon Rahm','Hideki Matsuyama','Xander Schauffele']},
+  {id:25,last:'Mauro',first:'Anthony',handicap:5.3,net:null,feePaid:false,pros:['Matt Fitzpatrick','Cameron Young','Xander Schauffele']},
+  {id:26,last:'Patel',first:'Vikas',handicap:9.4,net:null,feePaid:false,pros:['Ludvig Åberg','Hideki Matsuyama','Xander Schauffele']},
+  {id:27,last:'Peterson',first:'Don',handicap:9.7,net:null,feePaid:false,pros:['Jon Rahm','Ludvig Åberg','Xander Schauffele']},
   {id:28,last:'Pool',first:'Greg',handicap:0.08,net:null,feePaid:false,pros:['Bryson DeChambeau','Cameron Young','Matt Fitzpatrick']},
 ];
 
@@ -219,13 +219,39 @@ function totalScore(p) {
   return (p.net || 0) + prosTotal(p);
 }
 
+// ── ODDS ORDER for sorting pros display ──────────────────────────────────────
+const ODDS_ORDER = ['Jon Rahm','Bryson DeChambeau','Xander Schauffele','Ludvig Åberg','Matt Fitzpatrick',
+  'Cameron Young','Tommy Fleetwood','Justin Rose','Hideki Matsuyama','Collin Morikawa','Robert MacIntyre',
+  'Min Woo Lee','Patrick Reed','Brooks Koepka','Chris Gotterup','Russell Henley','Si Woo Kim','Jordan Spieth',
+  'Viktor Hovland','Shane Lowry','Nicolai Højgaard','Jake Knapp','Justin Thomas','Akshay Bhatia',
+  'Maverick McNealy','Adam Scott','J.J. Spaun','Sam Burns','Corey Conners','Cameron Smith','Gary Woodland',
+  'Sepp Straka','Brian Harman','Tyrrell Hatton','Tom Kim','Sungjae Im','Sahith Theegala','Tony Finau',
+  'Jason Day','Wyndham Clark','Marco Penge','Fred Couples','Ángel Cabrera'];
+
+function sortPros(pros) {
+  return [...pros].sort((a, b) => {
+    const ai = ODDS_ORDER.indexOf(a); const bi = ODDS_ORDER.indexOf(b);
+    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+  });
+}
+
+// Masters colour shading by position
+function rowStyle(i) {
+  if (i === 0) return 'background:#f0f7f0;'; // 1st - light green
+  if (i === 1) return 'background:#f5faf5;'; // 2nd
+  if (i === 2) return 'background:#faf9f0;'; // 3rd - light gold
+  if (i === 3) return 'background:#fdfcf4;'; // 4th
+  if (i === 4) return 'background:#fefef8;'; // 5th
+  if (i === 5) return 'background:#fefefe;'; // 6th
+  return '';
+}
+
 // ── LEADERBOARD ──────────────────────────────────────────────────────────────
 function renderLeaderboard() {
   const complete = participants.filter(p => p.pros.length === 3);
   const incomplete = participants.filter(p => p.pros.length < 3);
   const sorted = complete.map(p => ({...p, total: totalScore(p)})).sort((a, b) => a.total - b.total);
 
-  // stats
   if (sorted.length) {
     document.getElementById('stat-count').textContent = participants.length;
     document.getElementById('stat-leader').textContent = sorted[0].last;
@@ -236,9 +262,11 @@ function renderLeaderboard() {
   if (sorted.length) {
     const leader = sorted[0].total;
     html += `<div style="overflow-x:auto"><table><thead><tr>
-      <th>#</th><th>Name</th><th>Pros picked</th>
+      <th>#</th>
+      <th>Name</th>
+      <th>Pro 1</th><th>Pro 2</th><th>Pro 3</th>
       <th style="text-align:right">Wed net</th>
-      <th style="text-align:right">Pros</th>
+      <th style="text-align:right">Pros total</th>
       <th style="text-align:right">Total</th>
       <th style="text-align:right">Back</th>
       <th style="text-align:center">Fee paid</th>
@@ -249,23 +277,24 @@ function renderLeaderboard() {
       const diff = p.total - leader;
       const prize = PRIZES[i] !== undefined ? '$' + PRIZES[i] : '—';
       const prizeStyle = PRIZES[i] ? 'color:#1a7a4a;font-weight:700' : 'color:#999';
-      const feeHtml = p.feePaid
-        ? '<span style="color:#1a7a4a;font-weight:600">Yes</span>'
-        : '<span style="color:#c0392b">No</span>';
-      const prosHtml = p.pros.map(n => {
+      const feeHtml = p.feePaid ? '<span style="color:#1a7a4a;font-weight:600">Yes</span>' : '<span style="color:#c0392b">No</span>';
+      const borderBottom = i === 5 ? 'border-bottom:3px solid #1a4a2e;' : '';
+      const orderedPros = sortPros(p.pros);
+      const prosCells = orderedPros.map(n => {
         const d = proScores[n]; const isCut = d && d.cut; const s = getProScore(n);
-        return `<span style="margin-right:6px;white-space:nowrap">${n.split(' ').slice(-1)[0]}${isCut ? '<span class="cut-badge">CUT</span>' : ''} <span class="${scClass(s)}">${fmtScore(s)}</span></span>`;
+        const lastName = n.split(' ').slice(-1)[0];
+        return `<td style="font-size:12px;white-space:nowrap;${borderBottom}">${lastName}${isCut ? '<span class="cut-badge">CUT</span>' : ''} <span class="${scClass(s)}">${fmtScore(s)}</span></td>`;
       }).join('');
-      html += `<tr>
-        <td class="${i === 0 ? 'rank-gold' : ''}" style="width:26px">${i + 1}</td>
-        <td style="font-weight:600;white-space:nowrap">${p.first} ${p.last}</td>
-        <td style="font-size:12px;line-height:1.8">${prosHtml}</td>
-        <td class="${scClass(p.net)}" style="text-align:right">${fmtScore(p.net)}</td>
-        <td class="${scClass(pt)}" style="text-align:right">${fmtScore(pt)}</td>
-        <td class="${scClass(p.total)}" style="text-align:right;font-weight:700;font-size:14px">${fmtScore(p.total)}</td>
-        <td style="text-align:right;color:#999">${i === 0 ? '—' : '+' + diff}</td>
-        <td style="text-align:center">${feeHtml}</td>
-        <td style="${prizeStyle};text-align:right">${prize}</td>
+      html += `<tr style="${rowStyle(i)}">
+        <td class="${i === 0 ? 'rank-gold' : ''}" style="width:24px;${borderBottom}">${i + 1}</td>
+        <td style="font-weight:600;white-space:nowrap;${borderBottom}">${p.first} ${p.last}</td>
+        ${prosCells}
+        <td class="${scClass(p.net)}" style="text-align:right;${borderBottom}">${fmtScore(p.net)}</td>
+        <td class="${scClass(pt)}" style="text-align:right;${borderBottom}">${fmtScore(pt)}</td>
+        <td class="${scClass(p.total)}" style="text-align:right;font-weight:700;font-size:14px;${borderBottom}">${fmtScore(p.total)}</td>
+        <td style="text-align:right;color:#999;${borderBottom}">${i === 0 ? '—' : '+' + diff}</td>
+        <td style="text-align:center;${borderBottom}">${feeHtml}</td>
+        <td style="${prizeStyle};text-align:right;${borderBottom}">${prize}</td>
       </tr>`;
     });
     html += '</tbody></table></div>';
