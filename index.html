@@ -75,7 +75,7 @@
 <header>
   <div>
     <h1>⛳ 2026 Masters Pool</h1>
-    <p>28 participants · 3 pros each · missed cut = +10 penalty</p>
+    <p>29 participants · 3 pros each · missed cut = +10 penalty</p>
   </div>
   <div class="subtitle">Augusta National<br>Apr 9–12, 2026</div>
 </header>
@@ -125,7 +125,7 @@
 
 <script>
 // ── CONFIG ──────────────────────────────────────────────────────────────────
-const ADMIN_PASSWORD = 'VGCMasters';   // ← change this before sharing
+const ADMIN_PASSWORD = 'masters2026';   // ← change this before sharing
 const MISSED_CUT_PENALTY = 10;
 const BANNED = ['Scottie Scheffler','Rory McIlroy'];
 const PRIZES = [400, 300, 200, 100, 80, 40];
@@ -158,34 +158,35 @@ const ALL_PLAYERS = [
 
 // ── PARTICIPANTS (pre-loaded from your sheet) ────────────────────────────────
 let participants = [
-  {id:1,last:'Akins',first:'Dave',handicap:11.6,net:null,feePaid:false,pros:['Chris Gotterup','Tommy Fleetwood','Patrick Reed']},
-  {id:2,last:'Atkinson',first:'Ken',handicap:9.7,net:null,feePaid:false,pros:['Justin Rose','Patrick Reed','Sungjae Im']},
-  {id:3,last:'Brooks',first:'Lindsay',handicap:5.9,net:null,feePaid:false,pros:['J.J. Spaun','Sam Burns','Tommy Fleetwood']},
-  {id:4,last:'Bruno',first:'Frank',handicap:14.6,net:null,feePaid:false,pros:['Jordan Spieth','J.J. Spaun','Xander Schauffele']},
-  {id:5,last:'Carnovale',first:'Alessandro',handicap:6.6,net:null,feePaid:false,pros:['Cameron Young','Justin Rose','Xander Schauffele']},
-  {id:6,last:'Collier',first:'Dean',handicap:6.9,net:null,feePaid:false,pros:['Jon Rahm','Ludvig Åberg','Tommy Fleetwood']},
-  {id:7,last:'Cordoba',first:'Mike',handicap:11.5,net:null,feePaid:false,pros:['Jon Rahm','Matt Fitzpatrick','Justin Rose']},
-  {id:8,last:'Davidson',first:'Russ',handicap:6.6,net:null,feePaid:false,pros:['Bryson DeChambeau','Ludvig Åberg','Robert MacIntyre']},
-  {id:9,last:'Davidson',first:'Wayne',handicap:8.6,net:null,feePaid:false,pros:['Bryson DeChambeau','Jon Rahm','Tommy Fleetwood']},
-  {id:10,last:'Englmaier',first:'Tom',handicap:6.1,net:null,feePaid:false,pros:['Matt Fitzpatrick','Ludvig Åberg','Robert MacIntyre']},
-  {id:11,last:'Esmail',first:'Karim',handicap:10.1,net:null,feePaid:false,pros:['Bryson DeChambeau','Jon Rahm','Xander Schauffele']},
-  {id:12,last:'Graham',first:'Brian',handicap:4.6,net:null,feePaid:false,pros:['Bryson DeChambeau','Viktor Hovland','Marco Penge']},
-  {id:13,last:'Guzzo',first:'Gio',handicap:0.1,net:null,feePaid:false,pros:['Jon Rahm','Tommy Fleetwood','Xander Schauffele']},
-  {id:14,last:'Guzzo',first:'Joe',handicap:9.7,net:null,feePaid:false,pros:['Bryson DeChambeau','Justin Rose','Xander Schauffele']},
-  {id:15,last:'Harrison',first:'Brandon',handicap:5.8,net:null,feePaid:false,pros:[]},
-  {id:16,last:'Hopkins',first:'Jim',handicap:9.7,net:null,feePaid:false,pros:['Bryson DeChambeau','Jon Rahm','Tommy Fleetwood']},
-  {id:17,last:'Jung',first:'Jamie',handicap:3,net:null,feePaid:false,pros:['Jon Rahm','Matt Fitzpatrick','Patrick Reed']},
-  {id:18,last:'Kenny',first:'Tom',handicap:0.08,net:null,feePaid:false,pros:['Bryson DeChambeau','Justin Rose','Patrick Reed']},
-  {id:19,last:'Kirilenko',first:'Mike',handicap:12.6,net:null,feePaid:false,pros:['Matt Fitzpatrick','Ludvig Åberg','Brooks Koepka']},
-  {id:20,last:'Lee',first:'Robert',handicap:11.4,net:null,feePaid:false,pros:['Bryson DeChambeau','Jon Rahm','Ludvig Åberg']},
-  {id:21,last:'Lupulyak',first:'Vadym',handicap:12,net:null,feePaid:false,pros:['Bryson DeChambeau','Ludvig Åberg','Xander Schauffele']},
-  {id:22,last:'Ma',first:'Ernie',handicap:13.3,net:null,feePaid:false,pros:['Ludvig Åberg','Justin Rose','Xander Schauffele']},
-  {id:23,last:'Mann',first:'Sam',handicap:11.4,net:null,feePaid:false,pros:['Jon Rahm','Xander Schauffele','Cameron Young']},
-  {id:24,last:'Margawang',first:'Edwin',handicap:11.8,net:null,feePaid:false,pros:['Jon Rahm','Hideki Matsuyama','Xander Schauffele']},
-  {id:25,last:'Mauro',first:'Anthony',handicap:5.3,net:null,feePaid:false,pros:['Matt Fitzpatrick','Cameron Young','Xander Schauffele']},
-  {id:26,last:'Patel',first:'Vikas',handicap:9.4,net:null,feePaid:false,pros:['Ludvig Åberg','Hideki Matsuyama','Xander Schauffele']},
-  {id:27,last:'Peterson',first:'Don',handicap:9.7,net:null,feePaid:false,pros:['Jon Rahm','Ludvig Åberg','Xander Schauffele']},
-  {id:28,last:'Pool',first:'Greg',handicap:0.08,net:null,feePaid:false,pros:['Bryson DeChambeau','Cameron Young','Matt Fitzpatrick']},
+  {id:1,last:'Akins',first:'Dave',handicap:11.6,net:-4,feePaid:false,pros:['Chris Gotterup','Tommy Fleetwood','Patrick Reed']},
+  {id:2,last:'Atkinson',first:'Ken',handicap:9.7,net:-5,feePaid:true,pros:['Justin Rose','Patrick Reed','Sungjae Im']},
+  {id:3,last:'Brooks',first:'Lindsay',handicap:5.9,net:11,feePaid:true,pros:['J.J. Spaun','Patrick Reed','Tommy Fleetwood']},
+  {id:4,last:'Bruno',first:'Frank',handicap:14.6,net:6,feePaid:true,pros:['Jordan Spieth','J.J. Spaun','Xander Schauffele']},
+  {id:5,last:'Carnovale',first:'Alessandro',handicap:6.6,net:4,feePaid:true,pros:['Cameron Young','Justin Rose','Xander Schauffele']},
+  {id:6,last:'Collier',first:'Dean',handicap:6.9,net:-1,feePaid:true,pros:['Jon Rahm','Ludvig Åberg','Tommy Fleetwood']},
+  {id:7,last:'Cordoba',first:'Mike',handicap:11.5,net:11,feePaid:true,pros:['Jon Rahm','Matt Fitzpatrick','Justin Rose']},
+  {id:8,last:'Davidson',first:'Russ',handicap:6.6,net:5,feePaid:true,pros:['Bryson DeChambeau','Ludvig Åberg','Robert MacIntyre']},
+  {id:9,last:'Davidson',first:'Wayne',handicap:8.6,net:3,feePaid:true,pros:['Bryson DeChambeau','Jon Rahm','Tommy Fleetwood']},
+  {id:10,last:'Englmaier',first:'Tom',handicap:6.1,net:-1,feePaid:true,pros:['Matt Fitzpatrick','Ludvig Åberg','Robert MacIntyre']},
+  {id:11,last:'Esmail',first:'Karim',handicap:10.1,net:10,feePaid:true,pros:['Bryson DeChambeau','Jon Rahm','Xander Schauffele']},
+  {id:12,last:'Graham',first:'Brian',handicap:4.6,net:8,feePaid:true,pros:['Bryson DeChambeau','Viktor Hovland','Marco Penge']},
+  {id:13,last:'Guzzo',first:'Gio',handicap:0.1,net:2,feePaid:true,pros:['Jon Rahm','Tommy Fleetwood','Xander Schauffele']},
+  {id:14,last:'Guzzo',first:'Joe',handicap:9.7,net:-6,feePaid:true,pros:['Bryson DeChambeau','Justin Rose','Xander Schauffele']},
+  {id:15,last:'Harrison',first:'Brandon',handicap:5.8,net:14,feePaid:true,pros:['Bryson DeChambeau','Collin Morikawa','Chris Gotterup']},
+  {id:16,last:'Hopkins',first:'Jim',handicap:9.7,net:2,feePaid:true,pros:['Bryson DeChambeau','Jon Rahm','Tommy Fleetwood']},
+  {id:17,last:'Jung',first:'Jamie',handicap:3,net:2,feePaid:false,pros:['Jon Rahm','Matt Fitzpatrick','Patrick Reed']},
+  {id:18,last:'Kenny',first:'Tom',handicap:0.08,net:6,feePaid:true,pros:['Bryson DeChambeau','Justin Rose','Patrick Reed']},
+  {id:19,last:'Kirilenko',first:'Mike',handicap:12.6,net:5,feePaid:true,pros:['Matt Fitzpatrick','Ludvig Åberg','Brooks Koepka']},
+  {id:20,last:'Lee',first:'Robert',handicap:11.4,net:4,feePaid:true,pros:['Bryson DeChambeau','Jon Rahm','Ludvig Åberg']},
+  {id:21,last:'Lupulyak',first:'Vadym',handicap:12,net:6,feePaid:true,pros:['Bryson DeChambeau','Ludvig Åberg','Xander Schauffele']},
+  {id:22,last:'Ma',first:'Ernie',handicap:13.3,net:-2,feePaid:true,pros:['Ludvig Åberg','Justin Rose','Xander Schauffele']},
+  {id:23,last:'Mann',first:'Sam',handicap:11.4,net:-2,feePaid:true,pros:['Jon Rahm','Cameron Young','Xander Schauffele']},
+  {id:24,last:'Margawang',first:'Edwin',handicap:11.8,net:-7,feePaid:true,pros:['Jon Rahm','Hideki Matsuyama','Xander Schauffele']},
+  {id:25,last:'Mauro',first:'Anthony',handicap:5.3,net:8,feePaid:true,pros:['Matt Fitzpatrick','Cameron Young','Xander Schauffele']},
+  {id:26,last:'Patel',first:'Vikas',handicap:9.4,net:3,feePaid:true,pros:['Ludvig Åberg','Hideki Matsuyama','Xander Schauffele']},
+  {id:27,last:'Peterson',first:'Don',handicap:9.7,net:1,feePaid:true,pros:['Jon Rahm','Ludvig Åberg','Xander Schauffele']},
+  {id:28,last:'Pool',first:'Greg',handicap:0.08,net:-4,feePaid:true,pros:['Bryson DeChambeau','Cameron Young','Matt Fitzpatrick']},
+  {id:29,last:'Peterson (2)',first:'Don',handicap:9.7,net:1,feePaid:true,pros:['Matt Fitzpatrick','Cameron Young','Justin Rose']},
 ];
 
 // ── STATE ────────────────────────────────────────────────────────────────────
