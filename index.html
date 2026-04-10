@@ -286,8 +286,9 @@ function renderLeaderboard() {
     html += `<div style="overflow-x:auto"><table><thead><tr>
       <th>#</th>
       <th>Name</th>
-      <th>Pro 1</th><th>Pro 2</th><th>Pro 3</th>
       <th style="text-align:right">Total</th>
+      <th style="text-align:center">Wed net</th>
+      <th>Pro 1</th><th>Pro 2</th><th>Pro 3</th>
       <th style="text-align:right">Winnings</th>
     </tr></thead><tbody>`;
     sorted.forEach((p, i) => {
@@ -305,9 +306,10 @@ function renderLeaderboard() {
       }).join('');
       html += `<tr style="${rowStyle(i)}">
         <td class="${i === 0 ? 'rank-gold' : ''}" style="width:24px;${borderBottom}">${i + 1}</td>
-        <td style="font-weight:600;white-space:nowrap;${borderBottom}">${p.first} ${p.last} <span class="${scClass(p.net)}" style="font-weight:400;font-size:12px">${fmtScore(p.net)}</span></td>
-        ${prosCells}
+        <td style="font-weight:600;white-space:nowrap;${borderBottom}">${p.first} ${p.last}</td>
         <td class="${scClass(p.total)}" style="text-align:right;font-weight:700;font-size:14px;${borderBottom}">${fmtScore(p.total)}</td>
+        <td class="${scClass(p.net)}" style="text-align:center;${borderBottom}">${fmtScore(p.net)}</td>
+        ${prosCells}
         <td style="${prizeStyle};text-align:right;${borderBottom}">${prize}</td>
       </tr>`;
     });
