@@ -193,24 +193,24 @@ let participants = [
 let proScores = {
   'Sam Burns':          {score:-6, cut:false},
   'Patrick Reed':       {score:-6, cut:false},
-  'Xander Schauffele':  {score:-2, cut:false},
-  'Justin Rose':        {score:-6, cut:false},
   'Tommy Fleetwood':    {score:-5, cut:false},
-  'Cameron Young':      {score:-4,  cut:false},
-  'Chris Gotterup':     {score:-3,  cut:false},
-  'Brooks Koepka':      {score:-3,  cut:false},
-  'Hideki Matsuyama':   {score:-2,  cut:false},
+  'Justin Rose':        {score:-5, cut:false},
+  'Cameron Young':      {score:-4, cut:false},
+  'Chris Gotterup':     {score:-3, cut:false},
+  'Brooks Koepka':      {score:-3, cut:false},
+  'Xander Schauffele':  {score:-2, cut:false},
+  'Hideki Matsuyama':   {score:-2, cut:false},
+  'Matt Fitzpatrick':   {score:-1, cut:false},
+  'Collin Morikawa':    {score:-1, cut:false},
+  'Ludvig Åberg':       {score:0,  cut:false},
   'Jordan Spieth':      {score:1,  cut:false},
-  'Matt Fitzpatrick':   {score:-1,  cut:false},
-  'Collin Morikawa':    {score:-1,  cut:false},
-  'J.J. Spaun':         {score:5,  cut:true},
-  'Viktor Hovland':     {score:2,  cut:false},
-  'Bryson DeChambeau':  {score:6,  cut:true},
   'Sungjae Im':         {score:1,  cut:false},
   'Marco Penge':        {score:1,  cut:false},
-  'Ludvig Åberg':       {score:0,  cut:false},
-  'Robert MacIntyre':   {score:7,  cut:true},
+  'Viktor Hovland':     {score:2,  cut:false},
   'Jon Rahm':           {score:4,  cut:false},
+  'Bryson DeChambeau':  {score:6,  cut:true},
+  'J.J. Spaun':         {score:5,  cut:true},
+  'Robert MacIntyre':   {score:7,  cut:true},
 };
 let adminUnlocked = false;
 let editingIdx = null;
@@ -231,7 +231,7 @@ function scClass(s) {
 function getProScore(name) {
   const d = proScores[name];
   if (!d) return 0;
-  return d.cut ? MISSED_CUT_PENALTY : (d.score || 0);
+  return d.cut ? (d.score || 0) + MISSED_CUT_PENALTY : (d.score || 0);
 }
 function prosTotal(p) {
   return p.pros.reduce((a, n) => a + getProScore(n), 0);
