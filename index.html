@@ -272,7 +272,10 @@ function rowStyle(i) {
 function renderLeaderboard() {
   const complete = participants.filter(p => p.pros.length === 3);
   const incomplete = participants.filter(p => p.pros.length < 3);
-  const sorted = complete.map(p => ({...p, total: totalScore(p)})).sort((a, b) => a.total - b.total);
+  const sorted = complete.map(p => ({...p, total: totalScore(p)})).sort((a, b) => {
+    if (a.total !== b.total) return a.total - b.total;
+    return (a.net || 0) - (b.net || 0);
+  });
 
   if (sorted.length) {
     document.getElementById('stat-count').textContent = participants.length;
